@@ -3,14 +3,13 @@ const bot = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const http = require('http')
 const request = require('request')
 const fs = require('fs')
-const token = "OTEyMTYwNjk2ODA3MDg0MDgy.YZr52Q.ngkTbbvhpy_gIac-En0Bf956fh0"
 
 bot.once('ready', () => {
     initStatus();
     console.log('DPP is online.');
 });
 
-bot.login(token);
+bot.login(process.env.TOKEN);
 
 let duc = "912173800672612352";
 let dlc = "912169714522947614";
