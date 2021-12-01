@@ -15,6 +15,7 @@ let duc = "912173800672612352";
 let dlc = "912169714522947614";
 let dvs = "912171769081786379";
 let dsp = "915392502515773512";
+let die = "915414909993500773";
 
 // create plugins map
 let plugins = new Map();
@@ -22,6 +23,7 @@ plugins.set(dlc, "DP-LegendaryCash");
 plugins.set(dvs, "DP-VirtualStorage");
 plugins.set(duc, "DP-UniversalCore");
 plugins.set(dsp, "DP-SimplePrefix");
+plugins.set(die, "DP-ItemEditor");
 
 function getPluginVersion(pl) {
     let guild = bot.guilds.cache.get("740288168716140605");
@@ -50,10 +52,12 @@ function initStatus() {
     getPluginVersion(dvs);
     getPluginVersion(duc);
     getPluginVersion(dsp);
+    getPluginVersion(die);
     setInterval(() => {
         getPluginVersion(dlc);
         getPluginVersion(dvs);
         getPluginVersion(duc);
         getPluginVersion(dsp);
+        getPluginVersion(die);
     }, 1000 * 60);
 }
