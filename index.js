@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const http = require('http')
 const request = require('request')
@@ -79,11 +79,11 @@ async function checkPluginVersions() {
 
 function sendEmbed(title, name, version) {
     const embed = new MessageEmbed()
-        .setTitle(title)
+        .setTitle(title + " 플러그인 업데이트!")
         .setColor(0x00AE86)
         .setDescription(name)
         .setTimestamp(new Date())
-        .setAuthor(bot.user.tag)
+        .setThumbnail(guild.iconURL())
         .addFields({ name: '젠킨스 다운로드', value: `http://jenkins.dpnw.site/job/${name}/`, inline: false }, { name: '플러그인 버전', value: version, inline: false });
-    guild.channels.cache.get(vua).send(embed);
+    guild.channels.cache.get(vua).send({ embeds: [embed] });
 }
