@@ -62,6 +62,7 @@ async function checkPluginVersions() {
                     if (versionCache.has(name)) {
                         if (versionCache.get(name) != version) {
                             sendEmbed(title, name, version);
+                            versionCache.set(name, version);
                         }
                     } else {
                         versionCache.set(name, version);
