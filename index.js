@@ -24,6 +24,9 @@ plugins.set("DP-SimplePrefix", "🏷️DP-SimplePrefix");
 plugins.set("DP-ItemEditor", "🔨DP-ItemEditor");
 plugins.set("DP-SimpleMenu", "🎛️DP-SimpleMenu");
 plugins.set("DP-SimpleAnnouncement", "📢DP-SimpleAnnouncement");
+// create version cache map
+let versionCache = new Map();
+
 
 function initMessage() {
     guild = bot.guilds.cache.get("740288168716140605");
@@ -56,6 +59,13 @@ async function checkPluginVersions() {
                     const name = pluginYaml.name
                     msg += "**" + title + " : " + version + "**\n\n";
                     count++;
+                    if (versionCache.has(name)) {
+                        if (versionCache.get(name) != version) {
+                            sendEmbed(title, name, version);
+                        }
+                    } else {
+                        versionCache.set(name, version);
+                    }
                 }
                 res();
             })
@@ -67,17 +77,13 @@ async function checkPluginVersions() {
     });
 }
 
-// function initStatus() {
-//     getPluginVersion(dlc);
-//     getPluginVersion(dvs);
-//     getPluginVersion(duc);
-//     getPluginVersion(dsp);
-//     getPluginVersion(die);
-//     setInterval(() => {
-//         getPluginVersion(dlc);
-//         getPluginVersion(dvs);
-//         getPluginVersion(duc);
-//         getPluginVersion(dsp);
-//         getPluginVersion(die);
-//     }, 1000 * 60);
-// }
+function sendEmbed(title, name, version) {
+    const embed = new MessageEmbed()
+        .setTitle(title)
+        .setColor(0x00AE86)
+        .setDescription(name)
+        .setTimestamp(new Date())
+        .setAuthor(bot.user.tag)
+        .addFields({ name: '젠킨스 다운로드', value: `http://jenkins.dpnw.site/job/${name}/`, inline: false }, { name: '플러그인 버전', value: version, inline: false });
+    guild.channels.cache.get(vua).send(embed);
+}
