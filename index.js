@@ -9,8 +9,7 @@ bot.once('ready', () => {
     console.log('DPP is online.');
 });
 
-// bot.login(process.env.TOKEN);
-bot.login("OTEyMTYwNjk2ODA3MDg0MDgy.YZr52Q.qHM8C8FP04JfWjcHPoB_JEv-ua8");
+bot.login(process.env.TOKEN);
 let guild;
 let ch = "919421896997621811";
 let vua = "919422966859706369";
