@@ -29,6 +29,7 @@ let versionCache = new Map();
 
 
 function initMessage() {
+    var isSet = false;
     guild = bot.guilds.cache.get("740288168716140605");
     guild.channels.cache.get(ch).messages.fetch({ limit: 1 }).then(messages => {
         chm = messages.first();
@@ -37,15 +38,20 @@ function initMessage() {
         setInterval(() => {
             checkPluginVersions();
         }, 1000 * 60);
+        isSet = true;
         return;
     });
-    guild.channels.cache.get(ch).send("업데이트 정보 받아오는중...").then(msg => {
-        chm = msg;
-        checkPluginVersions();
-    });
-    setInterval(() => {
-        checkPluginVersions();
-    }, 1000 * 60);
+    if (isSet) {
+        return;
+    } else {
+        guild.channels.cache.get(ch).send("업데이트 정보 받아오는중...").then(msg => {
+            chm = msg;
+            checkPluginVersions();
+        });
+        setInterval(() => {
+            checkPluginVersions();
+        }, 1000 * 60);
+    }
 }
 
 async function checkPluginVersions() {
