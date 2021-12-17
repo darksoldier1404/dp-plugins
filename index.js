@@ -30,6 +30,15 @@ let versionCache = new Map();
 
 function initMessage() {
     guild = bot.guilds.cache.get("740288168716140605");
+    guild.channels.cache.get(ch).messages.fetch({ limit: 1 }).then(messages => {
+        chm = messages.first();
+        chm.edit(`업데이트 정보 받아오는중.....`);
+        checkPluginVersions();
+        setInterval(() => {
+            checkPluginVersions();
+        }, 1000 * 60);
+        return;
+    });
     guild.channels.cache.get(ch).send("업데이트 정보 받아오는중...").then(msg => {
         chm = msg;
         checkPluginVersions();
